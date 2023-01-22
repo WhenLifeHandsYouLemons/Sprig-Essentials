@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: sprig-essentials
-Version: 0.1.1
+Version: 0.1.2
 Summary: Useful functions for creating games and apps with Sprig
 Author-email: Sooraj Sannabhadti <developer.soorajs@gmail.com>
 Project-URL: Homepage, https://github.com/WhenLifeHandsYouLemons/sprig-essentials
@@ -12,7 +12,7 @@ Requires-Python: >=3.8
 Description-Content-Type: text/markdown
 License-File: LICENSE
 
-# sprig-essentials 0.1.1
+# sprig-essentials 0.1.2
 
 Useful functions to simplify the process of creating games and apps with Sprig.
 
