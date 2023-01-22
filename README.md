@@ -1,8 +1,8 @@
-# Sprig Essentials
+# sprig-essentials 0.1.1
 
 Useful functions to simplify the process of creating games and apps with Sprig.
 
-[![Upload Python Package](https://github.com/WhenLifeHandsYouLemons/Sprig-Essentials/actions/workflows/python-publish.yml/badge.svg)](https://github.com/WhenLifeHandsYouLemons/Sprig-Essentials/actions/workflows/python-publish.yml)
+[![Upload Python Package](https://github.com/WhenLifeHandsYouLemons/sprig-essentials/actions/workflows/python-publish.yml/badge.svg)](https://github.com/WhenLifeHandsYouLemons/sprig-essentials/actions/workflows/python-publish.yml)
 
 _**This package is not affiliated with Sprig or HackClub in any form.**_
 

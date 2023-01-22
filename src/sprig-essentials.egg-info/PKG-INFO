@@ -1,10 +1,10 @@
 Metadata-Version: 2.1
 Name: sprig-essentials
-Version: 0.1.0
+Version: 0.1.1
 Summary: Useful functions for creating games and apps with Sprig
 Author-email: Sooraj Sannabhadti <developer.soorajs@gmail.com>
-Project-URL: Homepage, https://github.com/WhenLifeHandsYouLemons/Sprig-Essentials
-Project-URL: Bug Tracker, https://github.com/WhenLifeHandsYouLemons/Sprig-Essentials/issues
+Project-URL: Homepage, https://github.com/WhenLifeHandsYouLemons/sprig-essentials
+Project-URL: Bug Tracker, https://github.com/WhenLifeHandsYouLemons/sprig-essentials/issues
 Classifier: Programming Language :: Python :: 3
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Operating System :: OS Independent
@@ -12,9 +12,11 @@ Requires-Python: >=3.8
 Description-Content-Type: text/markdown
 License-File: LICENSE
 
-# Sprig Essentials
+# sprig-essentials 0.1.1
 
 Useful functions to simplify the process of creating games and apps with Sprig.
+
+[![Upload Python Package](https://github.com/WhenLifeHandsYouLemons/sprig-essentials/actions/workflows/python-publish.yml/badge.svg)](https://github.com/WhenLifeHandsYouLemons/sprig-essentials/actions/workflows/python-publish.yml)
 
 _**This package is not affiliated with Sprig or HackClub in any form.**_
 
