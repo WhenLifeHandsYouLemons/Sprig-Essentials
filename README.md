@@ -9,25 +9,26 @@ _**This package is not affiliated with Sprig or HackClub in any form.**_
 This package is intended to run on any type of `Raspberry Pi`.
 Most focused on the `Raspberry Pi Pico H`.
 
-## Display
+This package assumes you've installed `CircuitPython` and are using the `ST7735` display.
 
-This package assumes you're using the `ST7735` display and that you've installed `CircuitPython`.
+## Wiring Diagram
 
 The wiring diagram that this package assumes is intended for anyone using a Sprig, however, you can also wire this manually and achieve the same effect.
 
-### Wiring Diagram
+![Image showing the pin connections from the Raspberry Pi Pico H to the various peripherals on the Sprig's board](https://camo.githubusercontent.com/d9b4afd8b99cc6befd3e04bdb8231c9fd134333ebd6a17166ca391429221ff05/68747470733a2f2f70617065722d6174746163686d656e74732e64726f70626f782e636f6d2f735f303531314241344231393135393837353345434243343935363743303632334234453646313535314241453338333243443842384232454441463236464142365f313636323537323037313339375f53637265656e2b53686f742b323032322d30392d30372b61742b312e33342e32312b504d2e706e67 "Taken from 'https://github.com/hackclub/sprig/blob/main/docs/GROWING_A_SPRIG.md'")
 
-INSERT IMAGE HERE
+## Display
 
 ### Imports
 
-You will need to import the following to connect to the pins.
+You will need to import the following to connect to the pins and use the package.
 
 ```python
 import board
+from sprig_essentials import *
 ```
 
-If you're using a Sprig, chances are the wiring is going to be the exact same through the board, so you can skip to [`quickStartDisplay()`](#quickstartdisplay()).
+If you're using a Sprig, chances are the wiring is going to be the exact same through the board, so you can skip to [`quickStartDisplay()`](#quickstartdisplay).
 
 ### `startBacklight()`
 
@@ -46,7 +47,7 @@ This function takes in the pin number where the `LITE` pin on the display is con
 
 It returns an object of type `digitalio.DigitalInOut` which will be used in other functions.
 
-#### Example
+Example:
 
 ```python
 import board
@@ -65,9 +66,93 @@ This function takes in 3 pin numbers (formatted like so: `board.GP0`) and create
 
 It returns an object of type `busio.SPI`.
 
-#### Example
+Example:
 
 ```python
 import board
 spi = createSPI(board.GP18, board.GP19, board.GP16)
+```
+
+### `createDisplayBus()`
+
+```python
+def createDisplayBus(spi, cs_pin, dc_pin, reset_pin):
+    display_bus = displayio.FourWire(spi, command=dc_pin, chip_select=cs_pin, reset=reset_pin)
+    return display_bus
+```
+
+This function takes in 3 pin numbers (formatted like so: `board.GP0`) along with an SPI (_See [`createSPI()`](#createspi)_) and creates a display bus.
+
+It returns an object of type `displayio.FourWire`.
+
+Example:
+
+```python
+import board
+spi = createSPI(board.GP18, board.GP19, board.GP16)
+display_bus = createDisplayBus(spi, board.GP20, board.GP22, board.GP26)
+```
+
+### `initDisplay()`
+
+```python
+def initDisplay(display_bus, width, height, rotation=0, bgr=True, auto_refresh=True):
+    display = ST7735R(display_bus, width=width, height=height, rotation=rotation, bgr=bgr)
+    display.auto_refresh = auto_refresh
+    return display
+```
+
+This function requires a display bus (_See [`createDisplayBus()`](#createdisplaybus)_), and the screen's width and height as an integer.
+
+There are 3 optional parameters: the rotation which should be a multiple of 90 degrees, the colour format (depends on the type of screen), and whether the display should auto-refresh or not.
+
+Example:
+
+```python
+import board
+spi = createSPI(board.GP18, board.GP19, board.GP16)
+display_bus = createDisplayBus(spi, board.GP20, board.GP22, board.GP26)
+display = initDisplay(display_bus, 160, 128, rotation=270)
+```
+
+### `quickStartDisplay()`
+
+```python
+def quickStartDisplay():
+    backlight = startBacklight(board.GP17)
+    spi = createSPI(board.GP18, board.GP19, board.GP16)
+    display_bus = createDisplayBus(spi, board.GP20, board.GP22, board.GP26)
+    display = initDisplay(display_bus, 160, 128, rotation=270)
+    return backlight, spi, display_bus, display
+```
+
+This function assumes you're using a Sprig, meaning the pin wiring will be the same across all of them. The display and Raspberry Pi Pico should be the same model and therefore these users can simply use this function rather than set the parameters manually using the previous functions.
+
+Example:
+
+```python
+backlight, spi, display_bus, display = quickStartDisplay()
+```
+
+Using this also doesn't require importing `board`.
+
+_**Documentation unfinished**_
+
+## Audio
+
+### `createI2S()`
+
+```python
+def createI2S(bit_clock_pin, word_select_pin, data_pin):
+    i2s = audiobusio.I2SOut(bit_clock_pin, word_select_pin, data_pin)
+    return i2s
+```
+
+This function takes in 3 numbers (formatted like so: `board.GP0`) and creates an I2S. The return is an `audiobusio.I2SOut` that can be used to play a sound.
+
+Example:
+
+```python
+import board
+i2s = createI2S(board.GP10, board.GP11, board.GP9)
 ```
