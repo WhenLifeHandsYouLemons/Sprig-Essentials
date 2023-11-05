@@ -19,6 +19,17 @@ class displayio__sprite:pass
 class terminalio__font:pass
 class label__label:pass
 
+# Convert rgb colour values to hex
+def convertRGBToHex(rgb: list):
+    if len(rgb) > 3:
+        raise IndexError(f"The list should have 3 value for the red, green, and blue channels! You have: {len(rgb)} values in your list.")
+    elif rgb[0] > 255 or rgb[0] < 0 or rgb[1] > 255 or rgb[1] < 0 or rgb[2] > 255 or rgb[2] < 0:
+        raise ValueError(f"The values should be between 0 and 255 inclusive! Your input is: {rgb}.")
+    elif (type(rgb[0]) != int and type(rgb[0]) != float) or (type(rgb[1]) != int and type(rgb[1]) != float) or (type(rgb[2]) != int and type(rgb[2]) != float):
+        raise TypeError("The values in the list are not of the correct type! It should either be an int or a float.")
+    else:
+        return int("{:02x}{:02x}{:02x}".format(rgb[0], rgb[1], rgb[2]), 16)
+
 # Turn on backlight as it doesn't turn on automatically
 def startBacklight(backlight_pin: pin_number) -> digitalio__digital_in_out:
     led = digitalio.DigitalInOut(backlight_pin)
@@ -26,15 +37,25 @@ def startBacklight(backlight_pin: pin_number) -> digitalio__digital_in_out:
     led.value = True
     return led
 
-def createSPI(clock_pin: pin_number, MOSI_pin: pin_number, MISO_pin: pin_number) -> busio__spi:
+def createSPI(clock_pin: pin_number,
+              MOSI_pin: pin_number,
+              MISO_pin: pin_number) -> busio__spi:
     spi = busio.SPI(clock=clock_pin, MOSI=MOSI_pin, MISO=MISO_pin)
     return spi
 
-def createDisplayBus(spi: busio__spi, cs_pin: pin_number, dc_pin: pin_number, reset_pin: pin_number) -> displayio__display_bus:
+def createDisplayBus(spi: busio__spi,
+                     cs_pin: pin_number,
+                     dc_pin: pin_number,
+                     reset_pin: pin_number) -> displayio__display_bus:
     display_bus = displayio.FourWire(spi, command=dc_pin, chip_select=cs_pin, reset=reset_pin)
     return display_bus
 
-def initDisplay(display_bus: displayio__display_bus, width: int, height: int, rotation: int = 0, bgr: bool = True, auto_refresh: bool = True) -> st7735r:
+def initDisplay(display_bus: displayio__display_bus,
+                width: int,
+                height: int,
+                rotation: int = 0,
+                bgr: bool = True,
+                auto_refresh: bool = True) -> st7735r:
     display = ST7735R(display_bus, width=width, height=height, rotation=rotation, bgr=bgr)
     display.auto_refresh = auto_refresh
     return display
@@ -47,14 +68,19 @@ def quickStartDisplay():
     display = initDisplay(display_bus, 160, 128, rotation=270)
     return backlight, spi, display_bus, display
 
-def createDisplayGroup(x: int = 0, y: int = 0, scale: int = 1) -> displayio__group:
+def createDisplayGroup(x: int = 0,
+                       y: int = 0,
+                       scale: int = 1) -> displayio__group:
     group = displayio.Group(x=x, y=y, scale=scale)
     return group
 
-def showDisplayGroup(display: st7735r, group: displayio__group):
+def showDisplayGroup(display: st7735r,
+                     group: displayio__group) -> None:
     display.show(group)
 
-def createBitmap(width: int, height: int, value_count: int = 1) -> displayio__bitmap:
+def createBitmap(width: int,
+                 height: int,
+                 value_count: int = 1) -> displayio__bitmap:
     bitmap = displayio.Bitmap(width, height, value_count)
     return bitmap
 
@@ -64,13 +90,19 @@ def createColourPalette(colours: list) -> displayio__palette:
         color_palette[i] = colours[i]
     return color_palette
 
-def createSprite(bitmap: displayio__bitmap, pixel_shader: displayio__palette, x=0, y=0) -> displayio__sprite:
+def createSprite(bitmap: displayio__bitmap,
+                 pixel_shader: displayio__palette,
+                 x = 0,
+                 y = 0) -> displayio__sprite:
     sprite = displayio.TileGrid(bitmap, pixel_shader=pixel_shader, x=x, y=y)
     return sprite
 
-def showSprite(group: displayio__group, sprite: displayio__sprite):
+def showSprite(group: displayio__group,
+               sprite: displayio__sprite) -> None:
     group.append(sprite)
 
-def createTextSprite(text: str, colour: list, font: terminalio__font = terminalio.FONT) -> label__label:
+def createTextSprite(text: str,
+                     colour: list,
+                     font: terminalio__font = terminalio.FONT) -> label__label:
     text_area = label.Label(font, text=text, color=colour[-1])
     return text_area
