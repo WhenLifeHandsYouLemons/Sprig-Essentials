@@ -1,4 +1,4 @@
-# sprig-essentials 0.1.2
+# sprig-essentials 0.2.0
 
 Useful functions to simplify the process of creating games and apps with Sprig.
 
