@@ -1,4 +1,4 @@
-# sprig-essentials 0.1.2
+# sprig-essentials 0.2.0
 
 Useful functions to simplify the process of creating games and apps with Sprig.
 
@@ -30,6 +30,10 @@ The wiring diagram that this package assumes is intended for anyone using a Spri
 Here's a clearer electrical wiring diagram:
 
 ![Image showing the electric wiring diagram for the Raspberry Pi Pico H and the Sprig](https://camo.githubusercontent.com/f0ff037c476cfa07603e9c8ec77394ee53f18701c89f509a2852b623583d1807/68747470733a2f2f70617065722d6174746163686d656e74732e64726f70626f782e636f6d2f735f303531314241344231393135393837353345434243343935363743303632334234453646313535314241453338333243443842384232454441463236464142365f313636323537313738303737365f53637265656e2b53686f742b323032322d30392d30372b61742b312e31322e35372b504d2e706e67 "Taken from 'https://github.com/hackclub/sprig/blob/main/docs/GROWING_A_SPRIG.md'")
+
+# DO NOT USE
+
+###### ###### BELOW IS THE OLD DOCUMENTATION VERSION (v0.1.2), PLEASE DO NOT USE ######
 
 ## Display
 
