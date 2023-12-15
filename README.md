@@ -6,6 +6,14 @@ Useful functions to simplify the process of creating games and apps with Sprig.
 
 _**This package is not affiliated with Sprig or HackClub in any form.**_
 
+## Installation
+
+To install `sprig-essentials`, use:
+
+```txt
+pip install sprig-essentials
+```
+
 # Documentation
 
 This package is intended to run on any type of `Raspberry Pi`.

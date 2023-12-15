@@ -14,7 +14,9 @@ class audiocore__rawsample:pass
 class audiocore__wavefile:pass
 class circuitpython_typing__AudioSample:pass
 
-def createI2S(bit_clock_pin: pin_number, word_select_pin: pin_number, data_pin: pin_number) -> audiobusio__i2s:
+def createI2S(bit_clock_pin: pin_number,
+              word_select_pin: pin_number,
+              data_pin: pin_number) -> audiobusio__i2s:
     i2s = audiobusio.I2SOut(bit_clock_pin, word_select_pin, data_pin)
     return i2s
 
