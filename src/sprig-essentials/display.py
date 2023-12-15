@@ -1,3 +1,4 @@
+from typing import Union
 import board
 import displayio, digitalio, busio, terminalio
 from adafruit_display_text import label
@@ -61,7 +62,7 @@ def initDisplay(display_bus: displayio__display_bus,
     return display
 
 # Automates display creation, assuming you're using a Sprig
-def quickStartDisplay():
+def quickStartDisplay() -> Union[digitalio__digital_in_out, busio__spi, displayio__display_bus, st7735r]:
     backlight = startBacklight(board.GP17)
     spi = createSPI(board.GP18, board.GP19, board.GP16)
     display_bus = createDisplayBus(spi, board.GP20, board.GP22, board.GP26)
@@ -92,8 +93,8 @@ def createColourPalette(colours: list) -> displayio__palette:
 
 def createSprite(bitmap: displayio__bitmap,
                  pixel_shader: displayio__palette,
-                 x = 0,
-                 y = 0) -> displayio__sprite:
+                 x: int = 0,
+                 y: int = 0) -> displayio__sprite:
     sprite = displayio.TileGrid(bitmap, pixel_shader=pixel_shader, x=x, y=y)
     return sprite
 
@@ -103,6 +104,8 @@ def showSprite(group: displayio__group,
 
 def createTextSprite(text: str,
                      colour: list,
+                     x: int = 0,
+                     y: int = 0,
                      font: terminalio__font = terminalio.FONT) -> label__label:
-    text_area = label.Label(font, text=text, color=colour[-1])
+    text_area = label.Label(font, text=text, color=colour[-1], x=x, y=y)
     return text_area
