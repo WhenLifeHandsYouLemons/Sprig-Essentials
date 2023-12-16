@@ -1,8 +1,8 @@
-# sprig-essentials 0.3.0
+# sprig_essentials 0.3.0
 
 Useful functions to simplify the process of creating games and apps with Sprig when using [CircuitPython](https://circuitpython.org/).
 
-[![Upload Python Package](https://github.com/WhenLifeHandsYouLemons/sprig-essentials/actions/workflows/python-publish.yml/badge.svg)](https://github.com/WhenLifeHandsYouLemons/sprig-essentials/actions/workflows/python-publish.yml)
+[![Upload Python Package](https://github.com/WhenLifeHandsYouLemons/sprig_essentials/actions/workflows/python-publish.yml/badge.svg)](https://github.com/WhenLifeHandsYouLemons/sprig_essentials/actions/workflows/python-publish.yml)
 
 _**This package is not affiliated with Sprig or HackClub in any form.**_
 
@@ -18,10 +18,10 @@ To install the correct CircuitPython firmware and libraries for the Raspberry Pi
 4. In the USB drive, create a new folder called `lib` if it doesn't already exist.
 5. Download the necessary libraries from [this repository]() and place them in the `lib` folder.
 
-To install `sprig-essentials` and use it on your Windows machine when developing for the Raspberry Pi Pico:
+To install `sprig_essentials` and use it on your Windows machine when developing for the Raspberry Pi Pico:
 
 ```txt
-pip install sprig-essentials
+pip install sprig_essentials
 ```
 
 This package is intended to run on the `Raspberry Pi Pico H`.
@@ -50,7 +50,7 @@ Here's a clearer electrical wiring diagram:
 
 ```py
 import board
-from sprig-essentials import display
+from sprig_essentials import display
 
 display_device = display.Display()
 ```
@@ -299,7 +299,7 @@ releaseDisplays()
 
 ```py
 import board
-from sprig-essentials import audio
+from sprig_essentials import audio
 
 audio_device = audio.Audio()
 ```
@@ -594,4 +594,4 @@ This function is currently a placeholder for future implementation.
 
 Enjoy creating, experimenting, and playing with a Sprig!
 
-[Back to top ↑](#sprig-essentials-030)
+[Back to top ↑](#sprig_essentials-030)
