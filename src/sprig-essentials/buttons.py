@@ -22,7 +22,7 @@ class Button:
 
         if quick_start:
             self.w, self.a, self.s, self.d, self.i, self.j, self.k, self.l = self.quickStartButtons()
-        else:
+        elif button_pin != None:
             self.button_pin = button_pin
             self.button = self.createButton(button_pin)
 
@@ -80,7 +80,7 @@ class Button:
     # Gets the current state of the button
     # True is pressed, False is released
     def getPressed(self,
-                   button: digitalio__digital_in_out = None) -> Union[bool, list]:
+                   button: digitalio__digital_in_out = None) -> Union[bool, list[bool]]:
         if button != None:
             return not button.value
 

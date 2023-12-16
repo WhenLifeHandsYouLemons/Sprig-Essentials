@@ -76,8 +76,8 @@ class Audio:
 
 
 # Creates an audio sample from an input buffer and can be used with the playAudio function
-def createAudioSample(audio_buffer,
-                      sample_rate = 8000) -> circuitpython_typing__AudioSample:
+def createAudioSample(audio_buffer: list[int],
+                      sample_rate: int = 8000) -> circuitpython_typing__AudioSample:
     audio_sample = audiocore.RawSample(audio_buffer, sample_rate=sample_rate)
 
     return audio_sample
@@ -96,7 +96,7 @@ def openMP3File(mp3_filename: str) -> circuitpython_typing__AudioSample:
     return wave_file
 
 # Generate one period of sine wave.
-def createSineWave() -> list:
+def createSineWave() -> list[int]:
     length = 8000 // 440
     sine_wave = array.array("H", [0] * length)
 
