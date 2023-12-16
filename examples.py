@@ -1,4 +1,5 @@
-# pylint: disable=import-error, multiple-imports, too-few-public-methods, missing-class-docstring, invalid-name, multiple-statements, missing-function-docstring, missing-module-docstring, redefined-outer-name, line-too-long, consider-using-enumerate
+############## DO NOT USE ##############
+# These examples are using the v0.1.2 package.
 import board
 import displayio, digitalio, busio, terminalio, audiobusio, audiocore
 from adafruit_display_text import label
@@ -82,17 +83,10 @@ def createTextSprite(text: str, colour: list, font: terminalio__font = terminali
     text_area = label.Label(font, text=text, color=colour[-1])
     return text_area
 
-def run_forever():
-    while True:
-        pass
-
 # For audio
 def createI2S(bit_clock_pin: pin_number, word_select_pin: pin_number, data_pin: pin_number) -> audiobusio__i2s:
     i2s = audiobusio.I2SOut(bit_clock_pin, word_select_pin, data_pin)
     return i2s
-
-# Automates audio creation, assuming you're using a Sprig
-def quickStartAudio():
 
 
 # Example code
@@ -124,4 +118,5 @@ showSprite(group_1, text_group)
 
 i2s = createI2S(board.GP10, board.GP11, board.GP9)
 
-run_forever()
+while True:
+    pass

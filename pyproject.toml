@@ -3,8 +3,8 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sprig-essentials"
-version = "0.2.0"
+name = "sprig_essentials"
+version = "0.3.0"
 authors = [
   { name="Sooraj Sannabhadti", email="developer.soorajs@gmail.com" },
 ]
@@ -18,5 +18,5 @@ classifiers = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/WhenLifeHandsYouLemons/sprig-essentials"
-"Bug Tracker" = "https://github.com/WhenLifeHandsYouLemons/sprig-essentials/issues"
+"Homepage" = "https://github.com/WhenLifeHandsYouLemons/sprig_essentials"
+"Bug Tracker" = "https://github.com/WhenLifeHandsYouLemons/sprig_essentials/issues"
