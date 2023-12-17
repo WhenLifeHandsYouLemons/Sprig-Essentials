@@ -1,8 +1,8 @@
-from typing import Any
 import board
 import displayio
 import audiobusio, audiocore, audiomp3
 import array, math
+from typing import Any
 
 # To show return tooltips for functions
 class pin_number:pass
@@ -11,14 +11,14 @@ class audiocore__rawsample:pass
 class audiocore__wavefile:pass
 class circuitpython_typing__AudioSample:pass
 
+# Reset all pins to allow new connections
+displayio.release_displays()
+
 class Audio:
     def __init__(self,
                  bit_clock_pin: pin_number = board.GP10,
                  word_select_pin: pin_number = board.GP11,
                  data_pin: pin_number = board.GP9) -> None:
-        # Reset all pins to allow new connections
-        displayio.release_displays()
-
         # Store inputs for future use if needed
         self.bit_clock_pin = bit_clock_pin
         self.word_select_pin = word_select_pin
@@ -76,7 +76,7 @@ class Audio:
 
 
 # Creates an audio sample from an input buffer and can be used with the playAudio function
-def createAudioSample(audio_buffer: list[int],
+def createAudioSample(audio_buffer: "list[int]",
                       sample_rate: int = 8000) -> circuitpython_typing__AudioSample:
     audio_sample = audiocore.RawSample(audio_buffer, sample_rate=sample_rate)
 
@@ -96,7 +96,7 @@ def openMP3File(mp3_filename: str) -> circuitpython_typing__AudioSample:
     return wave_file
 
 # Generate one period of sine wave.
-def createSineWave() -> list[int]:
+def createSineWave() -> "list[int]":
     length = 8000 // 440
     sine_wave = array.array("H", [0] * length)
 

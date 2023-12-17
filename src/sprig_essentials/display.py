@@ -1,8 +1,8 @@
-from typing import Any
 import board
 import displayio, digitalio, busio, terminalio
 from adafruit_display_text import label
 from adafruit_st7735r import ST7735R
+from typing import Any
 
 # To show return tooltips for functions
 class pin_number:pass
@@ -16,6 +16,9 @@ class displayio__palette:pass
 class displayio__sprite:pass
 class terminalio__font:pass
 class label__label:pass
+
+# Reset all pins to allow new connections
+displayio.release_displays()
 
 class Display:
     def __init__(self,
@@ -31,9 +34,6 @@ class Display:
                  rotation: int = 270,
                  bgr: bool = True,
                  auto_refresh: bool = True) -> None:
-        # Reset all pins to allow new connections
-        displayio.release_displays()
-
         # Store inputs for future use if needed
         self.backlight_pin = backlight_pin
         self.clock_pin = clock_pin
@@ -122,13 +122,14 @@ def createBitmap(width: int,
 
     return bitmap
 
-def createColourPalette(colours: list) -> displayio__palette:
-    color_palette = displayio.Palette(len(colours))
+# Need to use convertRGBToHex function before passing a colour into here
+def createColourPalette(colours: int) -> displayio__palette:
+    colour_palette = displayio.Palette(len(colours))
 
     for i in range(len(colours)):
-        color_palette[i] = colours[i]
+        colour_palette[i] = colours[i]
 
-    return color_palette
+    return colour_palette
 
 def createSprite(bitmap: displayio__bitmap,
                  pixel_shader: displayio__palette,

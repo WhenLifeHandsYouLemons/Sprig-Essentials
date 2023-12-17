@@ -1,4 +1,4 @@
-# sprig_essentials 0.3.0
+# sprig-essentials 0.3.1
 
 Useful functions to simplify the process of creating games and apps with Sprig when using [CircuitPython](https://circuitpython.org/).
 
@@ -21,7 +21,7 @@ To install the correct CircuitPython firmware and libraries for the Raspberry Pi
 To install `sprig_essentials` and use it on your Windows machine when developing for the Raspberry Pi Pico:
 
 ```txt
-pip install sprig_essentials
+pip install sprig-essentials
 ```
 
 This package is intended to run on the `Raspberry Pi Pico H`.
