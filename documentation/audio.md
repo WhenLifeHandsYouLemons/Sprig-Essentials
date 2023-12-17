@@ -1,10 +1,10 @@
-### `Audio` module
+### `audio` module
 
-#### Initialization
+#### Initialisation
 
 ```py
 import board
-from sprig-essentials import audio
+from sprig_essentials import audio
 
 audio_device = audio.Audio()
 ```
@@ -209,3 +209,5 @@ Example:
 ```py
 audio_buffer = createSineWave()
 ```
+
+---

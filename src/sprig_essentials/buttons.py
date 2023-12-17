@@ -16,15 +16,20 @@ class Button:
         # Store inputs for future use if needed
         self.quick_start = quick_start
 
-        # Intial button states
-        self.prev_state = False
-        self.cur_state = False
-
         if quick_start:
             self.w, self.a, self.s, self.d, self.i, self.j, self.k, self.l = self.quickStartButtons()
+
+            # Intial button states
+            # button order:                  w      a      s      d      i      j      k      l
+            self.quick_btns_prev_states = [False, False, False, False, False, False, False, False]
+            self.quick_btns_cur_states = [False, False, False, False, False, False, False, False]
         elif button_pin != None:
             self.button_pin = button_pin
             self.button = self.createButton(button_pin)
+
+            # Intial button states
+            self.prev_state = False
+            self.cur_state = False
 
     def __call__(self, *args: Any, **kwds: Any) -> Any:
         if self.quick_start:
@@ -91,7 +96,43 @@ class Button:
             return [self.getPressed(self.w), self.getPressed(self.a), self.getPressed(self.s), self.getPressed(self.d),
                     self.getPressed(self.i), self.getPressed(self.j), self.getPressed(self.k), self.getPressed(self.l)]
 
+    # Returns "pressed" if state changes from False to True, and "released" if state changes from True to False, and "no change" if nothing changed
+    # IMPORTANT: Run updateButton immediately before running this
+    def getButtonStateChange(self) -> Union[bool, "list[bool]"]:
+        if not self.quick_start:
+            if self.prev_state != self.cur_state:
+                if self.cur_state:
+                    return "pressed"
+                else:
+                    return "released"
+            else:
+                return "no change"
+        else:
+            # Return a list of all the buttons that are pressed currently
+            output = []
+            for p, c in zip(self.quick_btns_prev_states, self.quick_btns_cur_states):
+                if p != c:
+                    if c:
+                        output.append("pressed")
+                    else:
+                        output.append("released")
+                else:
+                    output.append("no change")
+            return output
+
     # Update the current and previous state of the button
-    # TODO
     def updateButton(self) -> None:
-        pass
+        if self.quick_start:
+            self.quick_btns_prev_states = self.quick_btns_cur_states.copy()
+            self.quick_btns_cur_states = self.getPressed()
+        else:
+            self.prev_state = self.cur_state
+            self.prev_state = self.getPressed()
+
+    def resetButtonStates(self) -> None:
+        if self.quick_start:
+            self.quick_btns_cur_states = [False, False, False, False, False, False, False, False]
+            self.quick_btns_prev_states = [False, False, False, False, False, False, False, False]
+        else:
+            self.cur_state = False
+            self.prev_state = False

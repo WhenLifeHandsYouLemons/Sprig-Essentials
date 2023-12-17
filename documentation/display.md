@@ -4,7 +4,7 @@
 
 ```py
 import board
-from sprig-essentials import display
+from sprig_essentials import display
 
 display_device = display.Display()
 ```
@@ -181,7 +181,7 @@ bitmap = createBitmap(10, 20)
 Creates a colour palette object.
 
 - **Parameters:**
-  - `colours`: List of colours
+  - `colours`: Integer of a colour (use the `convertRGBToHex` function before inputting this value)
 - **Returns:** `displayio__palette` object.
 
 Example:
@@ -244,3 +244,5 @@ Example:
 ```py
 releaseDisplays()
 ```
+
+---

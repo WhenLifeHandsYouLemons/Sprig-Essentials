@@ -10,3 +10,4 @@ def convertRGBToHex(rgb: list):
         raise TypeError("The values in the list are not of the correct type! It should either be an int or a float.")
     else:
         return int("{:02x}{:02x}{:02x}".format(rgb[0], rgb[1], rgb[2]), 16)
+    

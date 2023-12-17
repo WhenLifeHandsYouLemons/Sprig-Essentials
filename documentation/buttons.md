@@ -1,4 +1,4 @@
-### `Button` class
+### `buttons` module
 
 #### Initialisation
 
@@ -7,7 +7,7 @@ import board
 from sprig_essentials import button
 
 # Initialize a button using a pin number
-button_1 = button.Button(board.GP4)
+button_1 = button.Button(board.GP5)
 
 # Or if using a Sprig
 buttons = button.Button(quick_start=True)
@@ -34,7 +34,7 @@ Example:
 
 ```py
 button = button.Button()
-button_object = button.createButton(board.GP4)
+button_object = button.createButton(board.GP5)
 ```
 
 ---
@@ -66,8 +66,12 @@ Gets the current state of the button.
 Example:
 
 ```py
-button = button.Button(board.GP4)
-state = button.getPressed()  # Get state of specific button
+button = button.Button(board.GP5)
+state = button.getPressed()    # Get state of specific button
+
+# Or if using Sprig's 8 buttons
+buttons = button.Button()
+states = buttons.getPressed()    # Get state of all buttons
 ```
 
 ---
@@ -79,4 +83,58 @@ Updates the current and previous state of the button.
 - **Parameters:** `None`
 - **Returns:** `None`.
 
-This function is currently a placeholder for future implementation.
+Example:
+
+```py
+button = button.Button(board.GP5)
+button.updateButton()    # Update state of specific button
+
+# Or if using Sprig's 8 buttons
+buttons = button.Button()
+buttons.updateButton()    # Update state of all buttons
+```
+
+---
+
+#### `getButtonStateChange`
+
+Returns the state change of the button.
+
+- **Parameters:** `None`
+- **Returns:**:
+  - `"pressed"` if state changes from `False` to `True`
+  - `"released"` if state changes from `True` to `False`
+  - `"no change"` if state did not change
+
+Example:
+
+```py
+button = button.Button(board.GP5)
+state_change = button.getButtonStateChange()    # Get state change of specific button
+
+# Or if using Sprig's 8 buttons
+buttons = button.Button()
+state_changes = buttons.getButtonStateChange()    # Get state change of all buttons
+```
+
+---
+
+#### `resetButtonStates`
+
+Resets the current and previous state of the button.
+
+- **Parameters:** `None`
+- **Returns:** `None`.
+
+Example:
+
+```py
+button = button.Button(board.GP5)
+button.resetButtonStates()    # Reset state of specific button
+
+# Or if using Sprig's 8 buttons
+buttons = button.Button()
+buttons.resetButtonStates()    # Reset state of all buttons
+```
+
+---
