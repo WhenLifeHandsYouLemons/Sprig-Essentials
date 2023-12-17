@@ -6,13 +6,13 @@ from typing import Any, Union
 class pin_number:pass
 class digitalio__digital_in_out:pass
 
+# Reset all pins to allow new connections
+displayio.release_displays()
+
 class Button:
     def __init__(self,
                  button_pin: pin_number = None,
                  quick_start: bool = False) -> None:
-        # Reset all pins to allow new connections
-        displayio.release_displays()
-
         # Store inputs for future use if needed
         self.quick_start = quick_start
 
@@ -42,36 +42,36 @@ class Button:
         return button
 
     # Automates buttons creation, assuming you're using a Sprig
-    def quickStartButtons() -> digitalio__digital_in_out:
-        w = digitalio.DigitalInOut(board.GP07)
+    def quickStartButtons(self) -> digitalio__digital_in_out:
+        w = digitalio.DigitalInOut(board.GP5)
         w.direction = digitalio.Direction.INPUT
         w.pull = digitalio.Pull.UP
 
-        a = digitalio.DigitalInOut(board.GP09)
+        a = digitalio.DigitalInOut(board.GP6)
         a.direction = digitalio.Direction.INPUT
         a.pull = digitalio.Pull.UP
 
-        s = digitalio.DigitalInOut(board.GP10)
+        s = digitalio.DigitalInOut(board.GP7)
         s.direction = digitalio.Direction.INPUT
         s.pull = digitalio.Pull.UP
 
-        d = digitalio.DigitalInOut(board.GP11)
+        d = digitalio.DigitalInOut(board.GP8)
         d.direction = digitalio.Direction.INPUT
         d.pull = digitalio.Pull.UP
 
-        i = digitalio.DigitalInOut(board.GP16)
+        i = digitalio.DigitalInOut(board.GP12)
         i.direction = digitalio.Direction.INPUT
         i.pull = digitalio.Pull.UP
 
-        j = digitalio.DigitalInOut(board.GP17)
+        j = digitalio.DigitalInOut(board.GP13)
         j.direction = digitalio.Direction.INPUT
         j.pull = digitalio.Pull.UP
 
-        k = digitalio.DigitalInOut(board.GP19)
+        k = digitalio.DigitalInOut(board.GP14)
         k.direction = digitalio.Direction.INPUT
         k.pull = digitalio.Pull.UP
 
-        l = digitalio.DigitalInOut(board.GP20)
+        l = digitalio.DigitalInOut(board.GP15)
         l.direction = digitalio.Direction.INPUT
         l.pull = digitalio.Pull.UP
 
@@ -80,7 +80,7 @@ class Button:
     # Gets the current state of the button
     # True is pressed, False is released
     def getPressed(self,
-                   button: digitalio__digital_in_out = None) -> Union[bool, list[bool]]:
+                   button: digitalio__digital_in_out = None) -> Union[bool, "list[bool]"]:
         if button != None:
             return not button.value
 
