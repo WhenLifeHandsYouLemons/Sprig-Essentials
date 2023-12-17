@@ -1,3 +1,17 @@
+Metadata-Version: 2.1
+Name: sprig-essentials
+Version: 0.3.1
+Summary: Useful functions for creating games and apps with Sprig
+Author-email: Sooraj Sannabhadti <developer.soorajs@gmail.com>
+Project-URL: Homepage, https://github.com/WhenLifeHandsYouLemons/sprig_essentials
+Project-URL: Bug Tracker, https://github.com/WhenLifeHandsYouLemons/sprig_essentials/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 # sprig-essentials 0.3.1
 
 Useful functions to simplify the process of creating games and apps with Sprig when using [CircuitPython](https://circuitpython.org/).
@@ -16,7 +30,7 @@ To install the correct CircuitPython firmware and libraries for the Raspberry Pi
 2. Press and hold the white button on the RPi Pico, then plug it into your computer while pressing the button. It should appear as a USB drive.
 3. Drag the downloaded .UF2 file into the USB drive. The RPi Pico should automatically reboot and CircuitPython should be installed.
 4. In the USB drive, create a new folder called `lib` if it doesn't already exist.
-5. Download the necessary libraries from [this repository](https://github.com/WhenLifeHandsYouLemons/sprig-essentials/tree/cbcddaf0884fbc39bbaa791aa085280db103ce35/libraries) and place them in the `lib` folder.
+5. Download the necessary libraries from [this repository]() and place them in the `lib` folder.
 
 To install `sprig_essentials` and use it on your Windows machine when developing for the Raspberry Pi Pico:
 
