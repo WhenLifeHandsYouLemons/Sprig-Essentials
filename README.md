@@ -10,7 +10,7 @@ Useful functions to simplify the process of creating games and apps with Sprig w
 
 ## Installation
 
-To install the correct CircuitPython firmware and libraries for the Raspberry Pi Pico, follow these steps:
+To install the correct **CircuitPython** firmware and libraries for the Raspberry Pi Pico, follow these steps:
 
 1. Download the .UF2 from the CircuitPython website [here](https://circuitpython.org/board/raspberry_pi_pico/).
 2. Press and hold the white button on the RPi Pico, then plug it into your computer while pressing the button. It should appear as a USB drive.
@@ -18,15 +18,15 @@ To install the correct CircuitPython firmware and libraries for the Raspberry Pi
 4. In the USB drive, create a new folder called `lib` if it doesn't already exist.
 5. Download the necessary libraries from [this sub-folder](https://github.com/WhenLifeHandsYouLemons/sprig-essentials/tree/cbcddaf0884fbc39bbaa791aa085280db103ce35/libraries) and place them in the `lib` folder.
 
-To install `sprig_essentials` and use it on your Windows machine when developing for the Raspberry Pi Pico:
+At this point, you can now start using the `sprig_essentials` package on the Raspberry Pi Pico. To install `sprig_essentials` and use it on your Windows machine when developing for the Raspberry Pi Pico, you need to do the following:
 
-```txt
+```shell
 pip install sprig-essentials
 ```
 
-This package is intended to run on the `Raspberry Pi Pico H`.
+**This package is intended to run on the `Raspberry Pi Pico H`.**
 
-This package assumes you've installed `CircuitPython` and are using the `ST7735` display.
+**This package assumes you've installed `CircuitPython` and are using the `ST7735` display.**
 
 ---
 
@@ -34,11 +34,11 @@ This package assumes you've installed `CircuitPython` and are using the `ST7735`
 
 The wiring diagram that this package assumes is intended for anyone using a Sprig, however, you can also wire this manually and achieve the same effect.
 
-![Image showing the pin connections from the Raspberry Pi Pico H to the various peripherals on the Sprig's board](https://camo.githubusercontent.com/d9b4afd8b99cc6befd3e04bdb8231c9fd134333ebd6a17166ca391429221ff05/68747470733a2f2f70617065722d6174746163686d656e74732e64726f70626f782e636f6d2f735f303531314241344231393135393837353345434243343935363743303632334234453646313535314241453338333243443842384232454441463236464142365f313636323537323037313339375f53637265656e2b53686f742b323032322d30392d30372b61742b312e33342e32312b504d2e706e67 "Taken from 'https://github.com/hackclub/sprig/blob/main/docs/GROWING_A_SPRIG.md'")
+![Image showing the pcb wires from the Raspberry Pi Pico H to the various peripherals on the Sprig's board](https://github.com/WhenLifeHandsYouLemons/sprig-essentials/blob/development/documentation/images/sprig_pcb_wiring_diagram.png "Taken from 'https://github.com/hackclub/sprig/blob/main/docs/GROWING_A_SPRIG.md'")
 
-Here's a clearer electrical wiring diagram:
+Here's a clearer pin connection diagram for GPIO pin numbers:
 
-![Image showing the electric wiring diagram for the Raspberry Pi Pico H and the Sprig](https://camo.githubusercontent.com/f0ff037c476cfa07603e9c8ec77394ee53f18701c89f509a2852b623583d1807/68747470733a2f2f70617065722d6174746163686d656e74732e64726f70626f782e636f6d2f735f303531314241344231393135393837353345434243343935363743303632334234453646313535314241453338333243443842384232454441463236464142365f313636323537313738303737365f53637265656e2b53686f742b323032322d30392d30372b61742b312e31322e35372b504d2e706e67 "Taken from 'https://github.com/hackclub/sprig/blob/main/docs/GROWING_A_SPRIG.md'")
+![Image showing the pin connection diagram for the Raspberry Pi Pico H and the Sprig](https://github.com/WhenLifeHandsYouLemons/sprig-essentials/blob/development/documentation/images/sprig_peripheral_pin_connection_image.png "Taken from 'https://github.com/hackclub/sprig/blob/main/docs/GROWING_A_SPRIG.md'")
 
 ---
 
@@ -72,14 +72,13 @@ hex_value = core.convertRGBToHex([255, 255, 255])
 
 ---
 
-
 ### `display` module
 
 #### Initialisation
 
 ```py
 import board
-from sprig_essentials import display
+from sprig_essentials.io import display
 
 display_device = display.Display()
 ```
@@ -328,7 +327,7 @@ releaseDisplays()
 
 ```py
 import board
-from sprig_essentials import audio
+from sprig_essentials.io import audio
 
 audio_device = audio.Audio()
 ```
@@ -542,7 +541,7 @@ audio_buffer = createSineWave()
 
 ```py
 import board
-from sprig_essentials import button
+from sprig_essentials.io import button
 
 # Initialize a button using a pin number
 button_1 = button.Button(board.GP5)
@@ -673,6 +672,97 @@ button.resetButtonStates()    # Reset state of specific button
 # Or if using Sprig's 8 buttons
 buttons = button.Button()
 buttons.resetButtonStates()    # Reset state of all buttons
+```
+
+---
+
+### `led` module
+
+#### Initialisation
+
+```py
+import board
+from sprig_essentials.io import led
+
+# If you want to manually initialise the LED
+led_device = led.LED(board.GP28)
+
+# If you want to create the LED object and initialise it later
+led_device = led.LED()
+
+# If you are using this with a Sprig
+led_device = led.LED(quick_start=True)
+```
+
+- **Parameters:**
+  - `led_pin`: Pin number for the LED (default: `board.GP25`)
+- **Returns:** `LED` object.
+
+The `LED` class manages the Sprig's LED and its components. The initialisation functions in this class don't have to be called if you are using this with a Sprig.
+
+---
+
+#### `createLED`
+
+Creates a digital output object for the specified pin.
+
+- **Parameters:**
+  - `led_pin`: Pin number for the LED
+- **Returns:** `digitalio__digital_in_out` object.
+
+Example:
+
+```py
+led_object = led.LED()
+led_object.createLED(board.GP28)
+```
+
+---
+
+#### `on`
+
+Turns the LED on.
+
+- **Parameters:** `None`
+- **Returns:** `None`
+
+Example:
+
+```py
+led_object = led.LED(board.GP28)
+led_object.on()
+```
+
+---
+
+#### `off`
+
+Turns the LED off.
+
+- **Parameters:** `None`
+- **Returns:** `None`
+
+Example:
+
+```py
+led_object = led.LED(board.GP28)
+led_object.off()
+```
+
+---
+
+#### `toggle`
+
+Toggles the LED.
+
+- **Parameters:** `None`
+- **Returns:** `None`
+
+Example:
+
+```py
+led_object = led.LED(board.GP28)
+led_object.toggle()
 ```
 
 ---

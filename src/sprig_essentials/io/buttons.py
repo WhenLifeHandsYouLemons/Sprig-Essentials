@@ -1,6 +1,6 @@
 import board
 import displayio, digitalio
-from typing import Any, Union
+from typing import Any
 
 # To show return tooltips for functions
 class pin_number:pass
@@ -85,7 +85,7 @@ class Button:
     # Gets the current state of the button
     # True is pressed, False is released
     def getPressed(self,
-                   button: digitalio__digital_in_out = None) -> Union[bool, "list[bool]"]:
+                   button: digitalio__digital_in_out = None) -> bool | "list[bool]":
         if button != None:
             return not button.value
 
@@ -96,9 +96,11 @@ class Button:
             return [self.getPressed(self.w), self.getPressed(self.a), self.getPressed(self.s), self.getPressed(self.d),
                     self.getPressed(self.i), self.getPressed(self.j), self.getPressed(self.k), self.getPressed(self.l)]
 
-    # Returns "pressed" if state changes from False to True, and "released" if state changes from True to False, and "no change" if nothing changed
-    # IMPORTANT: Run updateButton immediately before running this
-    def getButtonStateChange(self) -> Union[bool, "list[bool]"]:
+    # Returns "pressed" if state changes from False to True,
+    #         "released" if state changes from True to False,
+    #         "no change" if nothing changed
+    def getButtonStateChange(self) -> bool | "list[bool]":
+        self.updateButton()
         if not self.quick_start:
             if self.prev_state != self.cur_state:
                 if self.cur_state:

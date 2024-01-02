@@ -4,7 +4,7 @@
 
 ```py
 import board
-from sprig_essentials import button
+from sprig_essentials.io import button
 
 # Initialize a button using a pin number
 button_1 = button.Button(board.GP5)
@@ -98,7 +98,7 @@ buttons.updateButton()    # Update state of all buttons
 
 #### `getButtonStateChange`
 
-Returns the state change of the button.
+Returns the state change of the button. This automatically updates the current and previous state of the button when called.
 
 - **Parameters:** `None`
 - **Returns:**:

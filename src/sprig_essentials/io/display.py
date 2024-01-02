@@ -1,6 +1,5 @@
 import board
-import displayio, digitalio, busio, terminalio
-from adafruit_display_text import label
+import displayio, digitalio, busio
 from adafruit_st7735r import ST7735R
 from typing import Any
 
@@ -14,8 +13,6 @@ class displayio__group:pass
 class displayio__bitmap:pass
 class displayio__palette:pass
 class displayio__sprite:pass
-class terminalio__font:pass
-class label__label:pass
 
 # Reset all pins to allow new connections
 displayio.release_displays()
@@ -138,12 +135,3 @@ def createSprite(bitmap: displayio__bitmap,
     sprite = displayio.TileGrid(bitmap, pixel_shader=pixel_shader, x=x, y=y)
 
     return sprite
-
-def createTextSprite(text: str,
-                     colour: tuple,
-                     x: int = 0,
-                     y: int = 0,
-                     font: terminalio__font = terminalio.FONT) -> label__label:
-    text_area = label.Label(font, text=text, color=colour, x=x, y=y)
-
-    return text_area
