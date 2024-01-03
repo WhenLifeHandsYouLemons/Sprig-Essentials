@@ -2,9 +2,9 @@ import board
 import displayio
 import audiobusio, audiocore, audiomp3
 import array, math
-from typing import Any
 
 # To show return tooltips for functions
+class Any:pass
 class pin_number:pass
 class audiobusio__i2s:pass
 class audiocore__rawsample:pass

@@ -1,9 +1,9 @@
 import board
 import displayio, digitalio, busio
 from adafruit_st7735r import ST7735R
-from typing import Any
 
 # To show return tooltips for functions
+class Any:pass
 class pin_number:pass
 class digitalio__digital_in_out:pass
 class busio__spi:pass

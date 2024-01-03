@@ -1,8 +1,8 @@
 import board
 import displayio, digitalio
-from typing import Any
 
 # To show return tooltips for functions
+class Any:pass
 class pin_number:pass
 class digitalio__digital_in_out:pass
 
