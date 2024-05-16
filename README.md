@@ -1,8 +1,8 @@
 # sprig-essentials 0.4.0
 
-Useful functions to simplify the process of creating games and apps with Sprig when using [CircuitPython](https://circuitpython.org/).
+Useful functions to simplify the process of creating games and apps with Sprig when using [*CircuitPython*](https://circuitpython.org/).
 
-**This package can currently only be used when developing using a device with internet. The package is not available for download on the Raspberry Pi Pico itself yet.**
+**This package can currently only be used when developing using a device with internet. The package is not available for download on the *Raspberry Pi Pico* itself yet.**
 
 [![Upload Python Package](https://github.com/WhenLifeHandsYouLemons/sprig_essentials/actions/workflows/python-publish.yml/badge.svg)](https://github.com/WhenLifeHandsYouLemons/sprig_essentials/actions/workflows/python-publish.yml)
 
@@ -10,19 +10,60 @@ Useful functions to simplify the process of creating games and apps with Sprig w
 
 ## Installation
 
-To install the correct **CircuitPython** firmware and libraries for the Raspberry Pi Pico, follow these steps:
+### Basic Installation
 
-1. Download the .UF2 from the CircuitPython website [here](https://circuitpython.org/board/raspberry_pi_pico/).
-2. Press and hold the white button on the RPi Pico, then plug it into your computer while pressing the button. It should appear as a USB drive.
-3. Drag the downloaded .UF2 file into the USB drive. The RPi Pico should automatically reboot and CircuitPython should be installed.
+To install the correct *CircuitPython* firmware and libraries for the *Raspberry Pi Pico*, follow these steps:
+
+1. Download the .UF2 from the *CircuitPython* website [here](https://circuitpython.org/board/raspberry_pi_pico/).
+2. Press and hold the white button on the *RPi Pico*, then plug it into your computer while pressing the button. It should appear as a USB drive.
+3. Drag the downloaded `.UF2` file into the USB drive. The *RPi Pico* should automatically reboot and *CircuitPython* should be installed.
 4. In the USB drive, create a new folder called `lib` if it doesn't already exist.
 5. Download the necessary libraries from [this sub-folder](https://github.com/WhenLifeHandsYouLemons/sprig-essentials/tree/cbcddaf0884fbc39bbaa791aa085280db103ce35/libraries) and place them in the `lib` folder.
+6. At this point, you can now start using the `sprig_essentials` package on the *Raspberry Pi Pico*.
 
-At this point, you can now start using the `sprig_essentials` package on the Raspberry Pi Pico. To install `sprig_essentials` and use it on your Windows machine when developing for the Raspberry Pi Pico, you need to do the following:
+To install `sprig_essentials` and use it on your Windows machine when developing for the *Raspberry Pi Pico*, you need to do the following:
 
 ```shell
 pip install sprig-essentials
 ```
+
+Then, to use it in a program you can import the entire package:
+
+```py
+import sprig_essentials as se
+```
+
+Or import specific modules (for example, the [display](#display-module) module):
+
+```py
+from sprig_essentials.io import display
+```
+
+### Manual Installation
+
+This package can be installed manually by downloading and compiling the source code. To do this, follow these steps:
+
+1. Clone the repository and nvaigate to it:
+
+    ```shell
+    git clone https://github.com/WhenLifeHandsYouLemons/sprig-essentials.git
+    cd sprig-essentials
+    ```
+
+2. Compile the package:
+
+    ```shell
+    python convert_to_mpy.py
+    ```
+
+    or
+
+    ```shell
+    python3 convert_to_mpy.py
+    ```
+
+3. Copy the files inside the `output` folder to your Raspberry Pi Pico's `lib` folder.
+4. You can now start using the `sprig_essentials` package on the Raspberry Pi Pico.
 
 **This package is intended to run on the `Raspberry Pi Pico H`.**
 
@@ -34,11 +75,11 @@ pip install sprig-essentials
 
 The wiring diagram that this package assumes is intended for anyone using a Sprig, however, you can also wire this manually and achieve the same effect.
 
-![Image showing the pcb wires from the Raspberry Pi Pico H to the various peripherals on the Sprig's board](https://github.com/WhenLifeHandsYouLemons/sprig-essentials/blob/development/documentation/images/sprig_pcb_wiring_diagram.png "Taken from 'https://github.com/hackclub/sprig/blob/main/docs/GROWING_A_SPRIG.md'")
+![Image showing the PCB wires from the Raspberry Pi Pico H to the various peripherals on the Sprig's board](documentation/images/sprig_pcb_wiring_diagram.png "Taken from 'https://github.com/hackclub/sprig/blob/main/docs/GROWING_A_SPRIG.md'")
 
 Here's a clearer pin connection diagram for GPIO pin numbers:
 
-![Image showing the pin connection diagram for the Raspberry Pi Pico H and the Sprig](https://github.com/WhenLifeHandsYouLemons/sprig-essentials/blob/development/documentation/images/sprig_peripheral_pin_connection_image.png "Taken from 'https://github.com/hackclub/sprig/blob/main/docs/GROWING_A_SPRIG.md'")
+![Image showing the pin connection diagram for the Raspberry Pi Pico H and the Sprig](documentation/images/sprig_peripheral_pin_connection_image.png "Taken from 'https://github.com/hackclub/sprig/blob/main/docs/GROWING_A_SPRIG.md'")
 
 ---
 
@@ -594,21 +635,27 @@ quick_buttons = button.quickStartButtons()
 
 #### `getPressed`
 
-Gets the current state of the button.
+Gets the current state of the button. This automatically updates the current and previous state of the button.
 
-- **Parameters:**
-  - `button`: Optional digital input object; if provided, gets the state of this specific button
-- **Returns:** If a specific button is provided, returns `True` if pressed, `False` if released. If no button is specified, returns a list of states for all buttons.
+- **Parameters:** `None`
+- **Returns:**
+  - Returns `True` if pressed
+  - Returns `False` if released
+  - If no button is specified, returns a list of states for all buttons.
 
 Example:
 
 ```py
 button = button.Button(board.GP5)
-state = button.getPressed()    # Get state of specific button
+state = button.getPressed()
 
-# Or if using Sprig's 8 buttons
+# Or if using the Sprig's 8 buttons
 buttons = button.Button()
 states = buttons.getPressed()    # Get state of all buttons
+
+# Getting the state of a specific button
+w_button = buttons[0]
+w_state = buttons.getPressed(w_button)
 ```
 
 ---
@@ -635,21 +682,21 @@ buttons.updateButton()    # Update state of all buttons
 
 #### `getButtonStateChange`
 
-Returns the state change of the button.
+Returns the state change of the button. This automatically updates the current and previous state of the button.
 
 - **Parameters:** `None`
 - **Returns:**:
   - `"pressed"` if state changes from `False` to `True`
   - `"released"` if state changes from `True` to `False`
-  - `"no change"` if state did not change
+  - `"no change"` if state did not change.
 
 Example:
 
 ```py
 button = button.Button(board.GP5)
-state_change = button.getButtonStateChange()    # Get state change of specific button
+state_change = button.getButtonStateChange()
 
-# Or if using Sprig's 8 buttons
+# Or if using the Sprig's 8 buttons
 buttons = button.Button()
 state_changes = buttons.getButtonStateChange()    # Get state change of all buttons
 ```

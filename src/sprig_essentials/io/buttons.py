@@ -47,7 +47,7 @@ class Button:
         return button
 
     # Automates buttons creation, assuming you're using a Sprig
-    def quickStartButtons(self) -> digitalio__digital_in_out:
+    def quickStartButtons(self) -> "tuple[digitalio__digital_in_out]":
         w = digitalio.DigitalInOut(board.GP5)
         w.direction = digitalio.Direction.INPUT
         w.pull = digitalio.Pull.UP
@@ -84,10 +84,8 @@ class Button:
 
     # Gets the current state of the button
     # True is pressed, False is released
-    def getPressed(self,
-                   button: digitalio__digital_in_out = None) -> bool | "list[bool]":
-        if button != None:
-            return not button.value
+    def getPressed(self) -> bool | "list[bool]":
+        self.updateButton()
 
         if not self.quick_start:
             return not self.button.value
@@ -101,6 +99,7 @@ class Button:
     #         "no change" if nothing changed
     def getButtonStateChange(self) -> bool | "list[bool]":
         self.updateButton()
+
         if not self.quick_start:
             if self.prev_state != self.cur_state:
                 if self.cur_state:
@@ -112,6 +111,7 @@ class Button:
         else:
             # Return a list of all the buttons that are pressed currently
             output = []
+
             for p, c in zip(self.quick_btns_prev_states, self.quick_btns_cur_states):
                 if p != c:
                     if c:
@@ -120,6 +120,7 @@ class Button:
                         output.append("released")
                 else:
                     output.append("no change")
+
             return output
 
     # Update the current and previous state of the button

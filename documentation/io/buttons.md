@@ -57,21 +57,27 @@ quick_buttons = button.quickStartButtons()
 
 #### `getPressed`
 
-Gets the current state of the button.
+Gets the current state of the button. This automatically updates the current and previous state of the button.
 
-- **Parameters:**
-  - `button`: Optional digital input object; if provided, gets the state of this specific button
-- **Returns:** If a specific button is provided, returns `True` if pressed, `False` if released. If no button is specified, returns a list of states for all buttons.
+- **Parameters:** `None`
+- **Returns:**
+  - Returns `True` if pressed
+  - Returns `False` if released
+  - If no button is specified, returns a list of states for all buttons.
 
 Example:
 
 ```py
 button = button.Button(board.GP5)
-state = button.getPressed()    # Get state of specific button
+state = button.getPressed()
 
-# Or if using Sprig's 8 buttons
+# Or if using the Sprig's 8 buttons
 buttons = button.Button()
 states = buttons.getPressed()    # Get state of all buttons
+
+# Getting the state of a specific button
+w_button = buttons[0]
+w_state = buttons.getPressed(w_button)
 ```
 
 ---
@@ -98,21 +104,21 @@ buttons.updateButton()    # Update state of all buttons
 
 #### `getButtonStateChange`
 
-Returns the state change of the button. This automatically updates the current and previous state of the button when called.
+Returns the state change of the button. This automatically updates the current and previous state of the button.
 
 - **Parameters:** `None`
 - **Returns:**:
   - `"pressed"` if state changes from `False` to `True`
   - `"released"` if state changes from `True` to `False`
-  - `"no change"` if state did not change
+  - `"no change"` if state did not change.
 
 Example:
 
 ```py
 button = button.Button(board.GP5)
-state_change = button.getButtonStateChange()    # Get state change of specific button
+state_change = button.getButtonStateChange()
 
-# Or if using Sprig's 8 buttons
+# Or if using the Sprig's 8 buttons
 buttons = button.Button()
 state_changes = buttons.getButtonStateChange()    # Get state change of all buttons
 ```
