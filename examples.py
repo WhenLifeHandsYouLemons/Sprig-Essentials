@@ -1,6 +1,7 @@
 ############## DO NOT USE ##############
 # These examples are using the v0.1.2 package.
-from sprig_essentials import display, audio, buttons
+from sprig_essentials.io import display, audio, buttons
+from sprig_essentials.graphics import shapes, text
 
 # Example code
 backlight = startBacklight(board.GP17)

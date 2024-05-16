@@ -4,7 +4,7 @@
 
 ```py
 import board
-from sprig_essentials import audio
+from sprig_essentials.io import audio
 
 audio_device = audio.Audio()
 ```

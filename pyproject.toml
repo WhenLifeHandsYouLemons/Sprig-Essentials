@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sprig_essentials"
-version = "0.4.0"
+version = "0.5.0"
 authors = [
   { name="Sooraj Sannabhadti", email="developer.soorajs@gmail.com" },
 ]
-description = "Useful functions for creating games and apps with Sprig"
+description = "Simplifying the process of creating games and apps for the Sprig."
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [

@@ -2,9 +2,9 @@ import board
 import displayio
 import audiobusio, audiocore, audiomp3
 import array, math
-from typing import Any
 
 # To show return tooltips for functions
+class Any:pass
 class pin_number:pass
 class audiobusio__i2s:pass
 class audiocore__rawsample:pass
@@ -100,7 +100,10 @@ def createSineWave() -> "list[int]":
     length = 8000 // 440
     sine_wave = array.array("H", [0] * length)
 
+    amplitude = 2 ** 15
+    x_offset = 2 ** 15
+
     for i in range(length):
-        sine_wave[i] = int(math.sin(math.pi * 2 * i / length) * (2 ** 15) + 2 ** 15)
+        sine_wave[i] = int(amplitude * math.sin(math.pi * 2 * i / length) + x_offset)
 
     return sine_wave

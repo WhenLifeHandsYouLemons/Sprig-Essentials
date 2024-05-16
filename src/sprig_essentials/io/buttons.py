@@ -1,8 +1,8 @@
 import board
 import displayio, digitalio
-from typing import Any, Union
 
 # To show return tooltips for functions
+class Any:pass
 class pin_number:pass
 class digitalio__digital_in_out:pass
 
@@ -47,7 +47,7 @@ class Button:
         return button
 
     # Automates buttons creation, assuming you're using a Sprig
-    def quickStartButtons(self) -> digitalio__digital_in_out:
+    def quickStartButtons(self) -> "tuple[digitalio__digital_in_out]":
         w = digitalio.DigitalInOut(board.GP5)
         w.direction = digitalio.Direction.INPUT
         w.pull = digitalio.Pull.UP
@@ -84,10 +84,8 @@ class Button:
 
     # Gets the current state of the button
     # True is pressed, False is released
-    def getPressed(self,
-                   button: digitalio__digital_in_out = None) -> Union[bool, "list[bool]"]:
-        if button != None:
-            return not button.value
+    def getPressed(self) -> bool | "list[bool]":
+        self.updateButton()
 
         if not self.quick_start:
             return not self.button.value
@@ -96,9 +94,12 @@ class Button:
             return [self.getPressed(self.w), self.getPressed(self.a), self.getPressed(self.s), self.getPressed(self.d),
                     self.getPressed(self.i), self.getPressed(self.j), self.getPressed(self.k), self.getPressed(self.l)]
 
-    # Returns "pressed" if state changes from False to True, and "released" if state changes from True to False, and "no change" if nothing changed
-    # IMPORTANT: Run updateButton immediately before running this
-    def getButtonStateChange(self) -> Union[bool, "list[bool]"]:
+    # Returns "pressed" if state changes from False to True,
+    #         "released" if state changes from True to False,
+    #         "no change" if nothing changed
+    def getButtonStateChange(self) -> bool | "list[bool]":
+        self.updateButton()
+
         if not self.quick_start:
             if self.prev_state != self.cur_state:
                 if self.cur_state:
@@ -110,6 +111,7 @@ class Button:
         else:
             # Return a list of all the buttons that are pressed currently
             output = []
+
             for p, c in zip(self.quick_btns_prev_states, self.quick_btns_cur_states):
                 if p != c:
                     if c:
@@ -118,6 +120,7 @@ class Button:
                         output.append("released")
                 else:
                     output.append("no change")
+
             return output
 
     # Update the current and previous state of the button
