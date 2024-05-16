@@ -9,7 +9,7 @@ mpy_cross_path = "mpy-cross-windows-8.2.9.static.exe"
 src_folder = "src\\sprig_essentials"
 
 # Get a list of all .py files in the src/sprig_essentials folder
-py_file_paths = [y for x in os.walk(src_folder) for y in glob(os.path.join(x[0], '[a-zA-Z]**.py'))]
+py_file_paths = [y for x in os.walk(src_folder) for y in glob(os.path.join(x[0], '*.py'))]
 
 # Create an output folder if it doesn't exist
 dst_folder = "output"

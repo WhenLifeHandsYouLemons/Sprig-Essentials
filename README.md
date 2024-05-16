@@ -1,4 +1,4 @@
-# sprig-essentials 0.4.0
+# sprig-essentials
 
 Useful functions to simplify the process of creating games and apps with Sprig when using [*CircuitPython*](https://circuitpython.org/).
 
