@@ -114,19 +114,19 @@ def createDisplayGroup(x: int = 0,
 
 def createBitmap(width: int,
                  height: int,
-                 value_count: int = 1) -> displayio__bitmap:
+                 value_count: int = 16777215) -> displayio__bitmap:
     bitmap = displayio.Bitmap(width, height, value_count)
 
     return bitmap
 
-# Need to use convertRGBToHex function before passing a colour into here
-def createColourPalette(colours: int) -> displayio__palette:
-    colour_palette = displayio.Palette(len(colours))
+# Use convertRGBToHex function before passing a colour into here
+def createColourPalette(colours: list[int]) -> displayio__palette:
+        colour_palette = displayio.Palette(len(colours))
 
-    for i in range(len(colours)):
-        colour_palette[i] = colours[i]
+        for i in range(len(colours)):
+            colour_palette[i] = colours[i]
 
-    return colour_palette
+        return colour_palette
 
 def createSprite(bitmap: displayio__bitmap,
                  pixel_shader: displayio__palette,

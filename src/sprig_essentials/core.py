@@ -1,5 +1,5 @@
 # Convert rgb colour values to hex
-def convertRGBToHex(rgb: list):
+def convertRGBToHex(rgb: list) -> int:
     if len(rgb) > 3:
         raise IndexError(f"The list should have 3 value for the red, green, and blue channels! You have: {len(rgb)} values in your list.")
     elif rgb[0] > 255 or rgb[0] < 0 or rgb[1] > 255 or rgb[1] < 0 or rgb[2] > 255 or rgb[2] < 0:
